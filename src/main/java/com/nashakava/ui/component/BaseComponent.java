@@ -1,5 +1,6 @@
 package com.nashakava.ui.component;
 
+import com.nashakava.ui.Base;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
