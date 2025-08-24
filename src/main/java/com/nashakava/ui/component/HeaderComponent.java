@@ -2,6 +2,8 @@ package com.nashakava.ui.component;
 
 import com.nashakava.ui.component.mainPageComponents.AboutUsComponent;
 import com.nashakava.ui.component.mainPageComponents.CargoAndPaymentComponent;
+import com.nashakava.ui.component.mainPageComponents.RelativeComponent;
+import com.nashakava.ui.elements.HeaderCatalogDropdown;
 import com.nashakava.ui.page.CartPage;
 import com.nashakava.ui.page.MainPage;
 import io.qameta.allure.Step;
@@ -14,6 +16,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class HeaderComponent extends BaseComponent {
+    @Getter
+    public HeaderCatalogDropdown headerCatalogDropdown;
+
     @Getter
     @FindBy(xpath = ".//img[@alt='Логотип']")
     private WebElement logoNashaKava;
@@ -42,9 +47,14 @@ public class HeaderComponent extends BaseComponent {
     @FindBy(xpath = ".//button[@aria-label='Корзина']/span")
     private WebElement cartCounter;
 
+    @Getter
+    @FindBy(xpath = ".//ul[@class='flex flex-col gap-1']")
+    private WebElement catalogDropdownElementRoot;
+
 
     public HeaderComponent(WebDriver driver, WebElement rootElement) {
         super(driver, rootElement);
+        headerCatalogDropdown = new HeaderCatalogDropdown(driver,catalogDropdownElementRoot);
     }
 
     @Step("Click on Logo Nasha Kava in Header")
@@ -55,10 +65,10 @@ public class HeaderComponent extends BaseComponent {
     }
 
     @Step("Click on Catalog Tab in Header")
-    public MainPage navigateToCatalogSection() {
+    public HeaderCatalogDropdown clickOnCatalogButton() {
         waitUntilElementClickable(catalogButton);
         catalogButton.click();
-        return new MainPage(driver);
+        return new HeaderCatalogDropdown(driver, catalogDropdownElementRoot);
     }
 
     @Step("Click on About Us Tab in Header")
