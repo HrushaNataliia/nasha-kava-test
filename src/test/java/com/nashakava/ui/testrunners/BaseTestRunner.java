@@ -1,10 +1,12 @@
-package com.coffeecart.ui.testrunners;
+package com.nashakava.ui.testrunners;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.time.Duration;
 
+import com.nashakava.utils.LocalStorageJS;
+import com.nashakava.utils.TestValueProvider;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -16,8 +18,6 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
 
-import com.coffeecart.utils.LocalStorageJS;
-import com.coffeecart.utils.TestValueProvider;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.Attachment;
