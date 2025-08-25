@@ -51,7 +51,6 @@ public class HeaderComponent extends BaseComponent {
     @FindBy(xpath = ".//ul[@class='flex flex-col gap-1']")
     private WebElement catalogDropdownElementRoot;
 
-
     public HeaderComponent(WebDriver driver, WebElement rootElement) {
         super(driver, rootElement);
         headerCatalogDropdown = new HeaderCatalogDropdown(driver, catalogDropdownElementRoot);
