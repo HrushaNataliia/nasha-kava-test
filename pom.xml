@@ -110,13 +110,6 @@
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
-                    <includes>
-                        <include>**/CucumberRunner.java</include>
-                    </includes>
-                    <suiteXmlFiles>
-                        <!-- <suiteXmlFile>src/test/resources/
-                        </suiteXmlFile> -->
-                    </suiteXmlFiles>
                 </configuration>
             </plugin>
         </plugins>
