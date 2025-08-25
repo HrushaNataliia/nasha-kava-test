@@ -1,6 +1,7 @@
 package com.nashakava.ui.page;
 
 import com.nashakava.ui.component.mainPageComponents.*;
+import com.nashakava.ui.modal.CartModal;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -25,6 +26,8 @@ public class MainPage extends BasePage {
     public CargoAndPaymentComponent cargoAndPaymentComponent;
     @Getter
     public QuestionsComponent questionsComponent;
+    @Getter
+    public CartModal cartModal;
 
     @Getter
     @FindBy(xpath = "//section[@class= 'relative']")
@@ -53,7 +56,9 @@ public class MainPage extends BasePage {
     @Getter
     @FindBy(xpath = "//section[contains(., 'Нас часто запитують')]")
     private WebElement questionsComponentRoot;
-
+    @Getter
+    @FindBy(xpath = "//div[@class='flex flex-col w-full']")
+    private WebElement cartModalRoot;
 
     public MainPage(WebDriver driver) {
         super(driver);
@@ -66,6 +71,8 @@ public class MainPage extends BasePage {
         reviewsComponent = new ReviewsComponent(driver, reviewsComponentRoot);
         cargoAndPaymentComponent = new CargoAndPaymentComponent(driver, cargoAndPaymentComponentRoot);
         questionsComponent = new QuestionsComponent(driver, questionsComponentRoot);
+        cartModal = new CartModal(driver, cartModalRoot);
+
     }
 
 }
