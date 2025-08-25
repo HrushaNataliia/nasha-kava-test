@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.time.Duration;
+import java.util.UUID;
 
 import com.nashakava.utils.LocalStorageJS;
 import com.nashakava.utils.TestValueProvider;
@@ -46,15 +47,21 @@ public class BaseTestRunner {
         }
 
         String userDataDir = System.getProperty("user.data.dir");
-        if (userDataDir != null && !userDataDir.isEmpty()) {
-            options.addArguments("--user-data-dir=" + userDataDir);
+        if (userDataDir == null || userDataDir.isEmpty()) {
+            userDataDir = "/tmp/chrome-" + UUID.randomUUID();
         }
+        options.addArguments("--user-data-dir=" + userDataDir);
 
-        String lang = System.getProperty("chrome.options", "--lang=en");
-        if (lang != null && !lang.isEmpty()) {
-            options.addArguments(lang);
+        // Мова браузера
+        options.addArguments("--lang=en");
+
+        // Headless режим для CI
+        String headless = System.getProperty("headless", "true");
+        if (headless.equals("true")) {
+            options.addArguments("--headless=new");
+            options.addArguments("--no-sandbox");
+            options.addArguments("--disable-dev-shm-usage");
         }
-        
 
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
