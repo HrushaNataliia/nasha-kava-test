@@ -8,14 +8,13 @@ import java.util.UUID;
 
 import com.nashakava.utils.LocalStorageJS;
 import com.nashakava.utils.TestValueProvider;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
-
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.Attachment;
@@ -35,55 +34,40 @@ public class BaseTestRunner {
         initDriver();
     }
 
-    @Step("init ChromeDriver")
+    @Step("Initialize ChromeDriver for CI")
     public void initDriver() {
         ChromeOptions options = new ChromeOptions();
 
-        String chromeOptionsArg = System.getProperty("chrome.options", "");
-        if (!chromeOptionsArg.isEmpty()) {
-            for (String option : chromeOptionsArg.split(",")) {
-                options.addArguments(option);
-            }
-        }
+        options.addArguments("--headless=new");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--disable-gpu");
+        options.addArguments("--disable-extensions");
+        options.addArguments("--disable-infobars");
+        options.addArguments("--disable-animations");
 
-        String userDataDir = System.getProperty("user.data.dir");
-        if (userDataDir == null || userDataDir.isEmpty()) {
-            userDataDir = "/tmp/chrome-" + UUID.randomUUID();
-        }
-        options.addArguments("--user-data-dir=" + userDataDir);
-
-        // Мова браузера
         options.addArguments("--lang=en");
+        options.addArguments("--window-size=1920,1080");
 
-        // Headless режим для CI
-        String headless = System.getProperty("headless", "true");
-        if (headless.equals("true")) {
-            options.addArguments("--headless=new");
-            options.addArguments("--no-sandbox");
-            options.addArguments("--disable-dev-shm-usage");
-        }
+        options.addArguments("--user-data-dir=/tmp/chrome-" + UUID.randomUUID());
 
         driver = new ChromeDriver(options);
-        driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(testValueProvider.getImplicitlyWait()));
 
         localStorageJS = new LocalStorageJS(driver);
     }
-
-
 
     @BeforeClass
     public void beforeClass() {
         if (driver == null) {
             initDriver();
         }
-
         driver.get(testValueProvider.getBaseUIUrl());
     }
 
-    @AfterClass()
+    @AfterClass
     public void afterClass(ITestContext context) {
-        takeScreenShot("PICTURE Test Name = " + context.getName());
+        takeScreenshot("PICTURE Test Name = " + context.getName());
         if (driver != null) {
             driver.quit();
         }
@@ -98,15 +82,15 @@ public class BaseTestRunner {
         driver = null;
     }
 
-    @Step("Clear Browser Memory Cookies and LocalStorage.")
+    @Step("Clear Browser Memory: Cookies and LocalStorage")
     public void clearBrowserMemory() {
         driver.manage().deleteAllCookies();
         localStorageJS.clearLocalStorage();
         driver.navigate().refresh();
     }
 
-    @Attachment(value = "Image name = {0}", type = "image/png")
-    public byte[] takeScreenShot(String attachName) {
+    @Attachment(value = "Screenshot: {0}", type = "image/png")
+    public byte[] takeScreenshot(String attachName) {
         byte[] result = null;
         File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         try {
@@ -117,5 +101,11 @@ public class BaseTestRunner {
         return result;
     }
 
-    
+    public WebElement waitUntilElementClickable(By locator, int timeoutSeconds) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutSeconds));
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(locator));
+
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+        return element;
+    }
 }
