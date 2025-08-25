@@ -54,7 +54,7 @@ public class HeaderComponent extends BaseComponent {
 
     public HeaderComponent(WebDriver driver, WebElement rootElement) {
         super(driver, rootElement);
-        headerCatalogDropdown = new HeaderCatalogDropdown(driver,catalogDropdownElementRoot);
+        headerCatalogDropdown = new HeaderCatalogDropdown(driver, catalogDropdownElementRoot);
     }
 
     @Step("Click on Logo Nasha Kava in Header")

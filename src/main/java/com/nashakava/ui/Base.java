@@ -89,7 +89,7 @@ public abstract class Base {
         }
     }
 
-    public void updateElements(){
+    public void updateElements() {
         PageFactory.initElements(this.driver, this);
     }
 
@@ -113,17 +113,13 @@ public abstract class Base {
         wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
-    protected void waitCssValueChanged(Supplier<String> currentValueSupplier,
-                                       String oldValue,
-                                       Duration timeout) {
+    protected void waitCssValueChanged(Supplier<String> currentValueSupplier, String oldValue, Duration timeout) {
 
-        new WebDriverWait(driver, timeout)
-                .until(d -> !currentValueSupplier.get().equals(oldValue));
+        new WebDriverWait(driver, timeout).until(d -> !currentValueSupplier.get().equals(oldValue));
     }
 
     protected void waitUntilElementInvisible(WebElement element, Duration timeout) {
-        new WebDriverWait(driver, timeout)
-                .until(ExpectedConditions.invisibilityOf(element));
+        new WebDriverWait(driver, timeout).until(ExpectedConditions.invisibilityOf(element));
     }
 
     public void refreshPage() {

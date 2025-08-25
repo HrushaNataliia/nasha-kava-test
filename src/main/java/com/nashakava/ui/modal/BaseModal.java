@@ -11,7 +11,7 @@ public class BaseModal extends Base {
     @Getter
     protected WebElement rootElement;
 
-    public BaseModal(WebDriver driver, WebElement rootElement){
+    public BaseModal(WebDriver driver, WebElement rootElement) {
         super(driver);
         this.rootElement = rootElement;
         PageFactory.initElements(new DefaultElementLocatorFactory(rootElement), this);

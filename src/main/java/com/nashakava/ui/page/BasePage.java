@@ -47,6 +47,7 @@ public abstract class BasePage extends Base {
     public void waitForPageToLoad(long timeoutInSeconds) {
         new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds)).until((ExpectedCondition<Boolean>) wd -> ((JavascriptExecutor) wd).executeScript("return document.readyState").equals("complete"));
     }
+
     @Step("Check if element is invisible: {0}")
     public Boolean isElementInvisible(WebElement element) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));

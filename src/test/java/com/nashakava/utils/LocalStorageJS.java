@@ -1,7 +1,6 @@
 package com.nashakava.utils;
 
 
-
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 

@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class MainPage extends BasePage{
+public class MainPage extends BasePage {
     @Getter
     public RelativeComponent relativeComponent;
     @Getter
@@ -57,15 +57,15 @@ public class MainPage extends BasePage{
 
     public MainPage(WebDriver driver) {
         super(driver);
-        relativeComponent = new RelativeComponent(driver,relativeComponentRoot);
-        aboutUsComponent = new AboutUsComponent(driver,aboutUsComponentRoot);
+        relativeComponent = new RelativeComponent(driver, relativeComponentRoot);
+        aboutUsComponent = new AboutUsComponent(driver, aboutUsComponentRoot);
         coffeeComponent = new CoffeeComponent(driver, coffeeComponentRoot);
-        forSoldiersComponent = new ForSoldiersComponent(driver,forSoldiersComponentRoot);
-        setsComponent = new SetsComponent(driver,setsComponentRoot);
-        komboochaComponent = new KomboochaComponent(driver,komboochaComponentRoot);
-        reviewsComponent = new ReviewsComponent(driver,reviewsComponentRoot);
-        cargoAndPaymentComponent = new CargoAndPaymentComponent(driver,cargoAndPaymentComponentRoot);
-        questionsComponent = new QuestionsComponent(driver,questionsComponentRoot);
+        forSoldiersComponent = new ForSoldiersComponent(driver, forSoldiersComponentRoot);
+        setsComponent = new SetsComponent(driver, setsComponentRoot);
+        komboochaComponent = new KomboochaComponent(driver, komboochaComponentRoot);
+        reviewsComponent = new ReviewsComponent(driver, reviewsComponentRoot);
+        cargoAndPaymentComponent = new CargoAndPaymentComponent(driver, cargoAndPaymentComponentRoot);
+        questionsComponent = new QuestionsComponent(driver, questionsComponentRoot);
     }
 
 }

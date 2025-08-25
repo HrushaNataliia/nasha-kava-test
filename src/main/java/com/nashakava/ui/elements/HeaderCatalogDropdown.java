@@ -50,6 +50,6 @@ public class HeaderCatalogDropdown extends BaseElement {
         waitUntilElementClickable(komboochaButton);
         komboochaButton.click();
         scrollToElement(mainPage.getKomboochaComponentRoot());
-        return new KomboochaComponent (driver, mainPage.getKomboochaComponentRoot());
+        return new KomboochaComponent(driver, mainPage.getKomboochaComponentRoot());
     }
 }
