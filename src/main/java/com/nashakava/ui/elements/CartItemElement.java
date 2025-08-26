@@ -1,7 +1,6 @@
 package com.nashakava.ui.elements;
 
 
-import com.nashakava.ui.page.MainPage;
 import io.qameta.allure.Step;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
