@@ -4,6 +4,7 @@ package com.nashakava.ui.page;
 import com.nashakava.ui.Base;
 import com.nashakava.ui.component.FooterComponent;
 import com.nashakava.ui.component.HeaderComponent;
+import com.nashakava.ui.elements.NotificationPopUp;
 import io.qameta.allure.Step;
 import lombok.Getter;
 import org.openqa.selenium.JavascriptExecutor;
@@ -23,6 +24,8 @@ public abstract class BasePage extends Base {
     public HeaderComponent header;
     @Getter
     public FooterComponent footer;
+    @Getter
+    public NotificationPopUp notificationPopUp;
 
     @Getter
     @FindBy(xpath = "//header[contains(@class, 'container') and contains(@class, 'sticky')]")
@@ -32,10 +35,16 @@ public abstract class BasePage extends Base {
     @FindBy(xpath = "//footer[@id ='contacts']")
     private WebElement footerRoot;
 
+    @Getter
+    @FindBy(xpath = "//div[@id='NotiflixNotifyWrap']")
+    private WebElement notificationPopUpRoot;
+
     public BasePage(WebDriver driver) {
         super(driver);
         header = new HeaderComponent(driver, headerRoot);
         footer = new FooterComponent(driver, footerRoot);
+        notificationPopUp = new NotificationPopUp(driver, notificationPopUpRoot);
+
     }
 
     @Step("Retrieve the full content height of the page")

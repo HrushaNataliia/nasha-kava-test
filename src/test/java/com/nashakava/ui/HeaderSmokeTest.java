@@ -19,7 +19,7 @@ public class HeaderSmokeTest extends BaseTestRunner {
     @Description("Verify Navigation From All Tabs In Header.")
     @Feature("Header")
     @Owner("Hrusha Nataliia")
-    public void verifyNavigationFromAllTabsInHeader() throws InterruptedException {
+    public void verifyNavigationFromAllTabsInHeader() {
         SoftAssert softAssert = new SoftAssert();
 
         MainPage mainPage = new MainPage(driver);
