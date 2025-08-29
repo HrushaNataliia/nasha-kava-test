@@ -4,6 +4,7 @@ import com.nashakava.ui.component.mainPageComponents.AboutUsComponent;
 import com.nashakava.ui.component.mainPageComponents.CargoAndPaymentComponent;
 import com.nashakava.ui.component.mainPageComponents.RelativeComponent;
 import com.nashakava.ui.elements.HeaderCatalogDropdown;
+import com.nashakava.ui.modal.CartModal;
 import com.nashakava.ui.page.CartPage;
 import com.nashakava.ui.page.MainPage;
 import io.qameta.allure.Step;
@@ -18,6 +19,8 @@ import java.util.regex.Pattern;
 public class HeaderComponent extends BaseComponent {
     @Getter
     public HeaderCatalogDropdown headerCatalogDropdown;
+    @Getter
+    public CartModal cartModal;
 
     @Getter
     @FindBy(xpath = ".//img[@alt='Логотип']")
@@ -54,6 +57,7 @@ public class HeaderComponent extends BaseComponent {
     public HeaderComponent(WebDriver driver, WebElement rootElement) {
         super(driver, rootElement);
         headerCatalogDropdown = new HeaderCatalogDropdown(driver, catalogDropdownElementRoot);
+
     }
 
     @Step("Click on Logo Nasha Kava in Header")
@@ -96,10 +100,10 @@ public class HeaderComponent extends BaseComponent {
 
 
     @Step("Click on Cart icon in Header")
-    public CartPage navigateToCartModal() {
+    public CartModal navigateToCartModal(MainPage mainPage) {
         waitUntilElementClickable(cartButton);
         cartButton.click();
-        return new CartPage(driver);
+        return new CartModal(driver, mainPage.getCartModalRoot());
     }
 
 

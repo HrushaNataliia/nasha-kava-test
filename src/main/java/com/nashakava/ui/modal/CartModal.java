@@ -8,13 +8,14 @@ import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import java.util.ArrayList;
+import java.time.Duration;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class CartModal extends BaseModal{
-
+public class CartModal extends BaseModal {
 
     @Getter
     @FindBy(xpath = ".//li[contains(@class, 'rounded')]")
@@ -32,18 +33,31 @@ public class CartModal extends BaseModal{
     @FindBy(xpath = ".//a[@href= '/order']")
     private WebElement makeOrderButton;
 
+    @Getter
+    @FindBy(xpath = ".//p[@class ='mb-[72px] text-title-h5 font-semibold']")
+    private WebElement emptyCartMessage;
+
+
     public CartModal(WebDriver driver, WebElement rootElement) {
         super(driver, rootElement);
     }
 
     public List<CartItemElement> getCartItems() {
+        waitUntilAllElementsVisible(cartItemElements);
         return cartItemElements.stream()
                 .map(element -> new CartItemElement(driver, element))
                 .collect(Collectors.toList());
     }
+
     public CartItemElement findItemByName(String itemName) {
-        return getCartItems().stream()
-                .filter(shortItem -> shortItem.getItemNameText().contains(itemName))
+        waitUntilAllElementsVisible(cartItemElements);
+        List<CartItemElement> cartItems = getCartItems();
+
+        return cartItems.stream()
+                .filter(cartItemElement -> {
+                    String itemText = cartItemElement.getItemNameText();
+                    return itemText != null && itemText.contains(itemName);
+                })
                 .findFirst()
                 .orElse(null);
     }
@@ -63,4 +77,10 @@ public class CartModal extends BaseModal{
         makeOrderButton.click();
         return new CartPage(driver);
     }
+
+    public String getEmptyCartMessageText() {
+        return emptyCartMessage.getText();
+    }
 }
+
+

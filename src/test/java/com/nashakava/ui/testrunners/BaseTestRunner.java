@@ -38,7 +38,7 @@ public class BaseTestRunner {
     public void initDriver() {
         ChromeOptions options = new ChromeOptions();
 
-        options.addArguments("--headless=new");
+      //  options.addArguments("--headless=new");
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--disable-gpu");
@@ -63,6 +63,7 @@ public class BaseTestRunner {
             initDriver();
         }
         driver.get(testValueProvider.getBaseUIUrl());
+
     }
 
     @AfterClass
