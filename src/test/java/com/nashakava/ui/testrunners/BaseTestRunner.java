@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.time.Duration;
 import java.util.UUID;
-
 import com.nashakava.utils.LocalStorageJS;
 import com.nashakava.utils.TestValueProvider;
 import org.openqa.selenium.*;
