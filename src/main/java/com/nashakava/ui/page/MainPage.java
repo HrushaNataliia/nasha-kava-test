@@ -60,7 +60,7 @@ public class MainPage extends BasePage {
     @FindBy(xpath = "//section[contains(., 'Нас часто запитують')]")
     private WebElement questionsComponentRoot;
     @Getter
-    @FindBy(xpath = "//div[@class='flex flex-col w-full']")
+    @FindBy(xpath = "//div[@id='order-list']")
     private WebElement cartModalRoot;
 
     @Getter

@@ -66,6 +66,7 @@ public class CoffeeCardComponent extends BaseElement {
 
     @Step("Click On Buy Button")
     public CoffeeCardComponent clickOnBuyButton() {
+        scrollToElement(buyButton);
         waitUntilElementClickable(buyButton);
         buyButton.click();
         return this;

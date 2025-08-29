@@ -54,15 +54,9 @@ public class HeaderComponent extends BaseComponent {
     @FindBy(xpath = ".//ul[@class='flex flex-col gap-1']")
     private WebElement catalogDropdownElementRoot;
 
-    @Getter
-    @FindBy(xpath = ".//div[@id='order-list']")
-    private WebElement cartModalRoot;
-
-
     public HeaderComponent(WebDriver driver, WebElement rootElement) {
         super(driver, rootElement);
         headerCatalogDropdown = new HeaderCatalogDropdown(driver, catalogDropdownElementRoot);
-        cartModal = new CartModal(driver, cartModalRoot);
 
     }
 
@@ -106,10 +100,10 @@ public class HeaderComponent extends BaseComponent {
 
 
     @Step("Click on Cart icon in Header")
-    public CartModal navigateToCartModal() {
+    public CartModal navigateToCartModal(MainPage mainPage) {
         waitUntilElementClickable(cartButton);
         cartButton.click();
-        return new CartModal(driver,cartModalRoot);
+        return new CartModal(driver, mainPage.getCartModalRoot());
     }
 
 

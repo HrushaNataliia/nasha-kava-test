@@ -6,8 +6,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class NotificationPopUp extends BaseElement{
+
     @Getter
-    @FindBy(xpath = ".//div[@id='NotiflixNotify-1']/span")
+    @FindBy(xpath = ".//div[@id='NotiflixNotify-1' ]/span[contains(text(),'Дякуємо за згоду')]")
+    private WebElement acceptCookiesNotification;
+
+    @Getter
+    @FindBy(xpath = ".//div[@id='NotiflixNotify-1' ]/span[contains(text(),'Додано в кошик')]")
     private WebElement addedToCartNotification;
 
     @Getter
@@ -27,4 +32,17 @@ public class NotificationPopUp extends BaseElement{
         waitUntilElementVisible(removalFromCartNotification);
         return removalFromCartNotification.getText();
     }
+
+
+    public void waitInvisibleCookiesNotification(){
+        waitUntilElementInvisible(acceptCookiesNotification);
+
+    }
+
+    public void waitInvisibleAddedToCartNotificationText(){
+        waitUntilElementInvisible(addedToCartNotification);
+    }
+
+
+
 }
