@@ -64,4 +64,12 @@ public class CoffeeCardComponent extends BaseElement {
         return new CoffeeGrindDropdown(driver, coffeeGrindDropdownRoot);
     }
 
+    @Step("Click On Buy Button")
+    public CoffeeCardComponent clickOnBuyButton() {
+        scrollToElement(buyButton);
+        waitUntilElementClickable(buyButton);
+        buyButton.click();
+        return this;
+    }
+
 }

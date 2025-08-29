@@ -8,12 +8,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 
-public class CartItemElement extends BaseElement{
+public class CartItemElement extends BaseElement {
     @Getter
     @FindBy(xpath = ".//p[@class= 'text-body-16s font-semibold']")
     private WebElement itemName;
     @Getter
-    @FindBy(xpath = ".//p[@class= 'text-body-16s font-semibold']")
+    @FindBy(xpath = ".//p[@class= 'text-body-12r font-medium']")
     private WebElement itemDescription;
     @Getter
     @FindBy(xpath = ".//input[@aria-label= 'Кількість']")
@@ -22,7 +22,7 @@ public class CartItemElement extends BaseElement{
     @FindBy(xpath = ".//p[@class= 'text-body-16s font-semibold text-nowrap']")
     private WebElement itemPrice;
     @Getter
-    @FindBy(xpath = ".button[@aria-label= 'Зменшити кількість']")
+    @FindBy(xpath = ".//button[@aria-label= 'Зменшити кількість']")
     private WebElement minusButton;
     @Getter
     @FindBy(xpath = ".//button[@aria-label= 'Збільшити кількість']")
@@ -35,11 +35,11 @@ public class CartItemElement extends BaseElement{
         super(driver, rootElement);
     }
 
-    public String getItemNameText(){
+    public String getItemNameText() {
         return itemName.getText();
     }
 
-    public String getItemDescriptionText(){
+    public String getItemDescriptionText() {
         return itemDescription.getText();
     }
 

@@ -2,6 +2,7 @@ package com.nashakava.ui.page;
 
 import com.nashakava.ui.component.mainPageComponents.*;
 import com.nashakava.ui.modal.CartModal;
+import com.nashakava.ui.modal.CookiesModal;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -28,6 +29,8 @@ public class MainPage extends BasePage {
     public QuestionsComponent questionsComponent;
     @Getter
     public CartModal cartModal;
+    @Getter
+    public CookiesModal cookiesModal;
 
     @Getter
     @FindBy(xpath = "//section[@class= 'relative']")
@@ -57,8 +60,12 @@ public class MainPage extends BasePage {
     @FindBy(xpath = "//section[contains(., 'Нас часто запитують')]")
     private WebElement questionsComponentRoot;
     @Getter
-    @FindBy(xpath = "//div[@class='flex flex-col w-full']")
+    @FindBy(xpath = "//div[@id='order-list']")
     private WebElement cartModalRoot;
+
+    @Getter
+    @FindBy(xpath = "//div[@class='container fixed bottom-0 left-[50%] -translate-y-5 -translate-x-[50%] z-[500] backdrop-blur-[2px]']")
+    private WebElement cookiesModalRoot;
 
     public MainPage(WebDriver driver) {
         super(driver);
@@ -72,6 +79,7 @@ public class MainPage extends BasePage {
         cargoAndPaymentComponent = new CargoAndPaymentComponent(driver, cargoAndPaymentComponentRoot);
         questionsComponent = new QuestionsComponent(driver, questionsComponentRoot);
         cartModal = new CartModal(driver, cartModalRoot);
+        cookiesModal = new CookiesModal(driver,cookiesModalRoot);
 
     }
 
