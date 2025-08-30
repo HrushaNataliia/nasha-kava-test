@@ -8,10 +8,6 @@ import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-
-import java.time.Duration;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,7 +30,7 @@ public class CartModal extends BaseModal {
     private WebElement makeOrderButton;
 
     @Getter
-    @FindBy(xpath = ".//p[@class ='mb-[72px] text-title-h5 font-semibold']")
+    @FindBy(xpath = ".//p")
     private WebElement emptyCartMessage;
 
 
