@@ -9,7 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class CoffeeCardComponent extends BaseElement {
+public class CoffeeCardComponent extends BaseComponent {
     @Getter
     public CoffeeGrindDropdown coffeeGrindDropdown;
     @Getter
