@@ -1,8 +1,7 @@
 package com.nashakava.ui.component;
 
-import com.nashakava.ui.elements.BaseElement;
-import com.nashakava.ui.elements.CoffeeGrindDropdown;
-import com.nashakava.ui.elements.CoffeeWeightElement;
+import com.nashakava.ui.elements.coffeeGrindDropdown.CoffeeGrindDropdown;
+import com.nashakava.ui.elements.coffeeWeightOption.CoffeeWeightElement;
 import io.qameta.allure.Step;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
