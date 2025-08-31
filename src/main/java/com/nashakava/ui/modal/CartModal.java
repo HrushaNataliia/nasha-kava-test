@@ -31,7 +31,7 @@ public class CartModal extends BaseModal {
 
     @Getter
     @FindBy(xpath = ".//p")
-    private WebElement emptyCartMessage;
+    private WebElement emptyCartModalMessage;
 
 
     public CartModal(WebDriver driver, WebElement rootElement) {
@@ -74,8 +74,8 @@ public class CartModal extends BaseModal {
         return new CartPage(driver);
     }
 
-    public String getEmptyCartMessageText() {
-        return emptyCartMessage.getText();
+    public String getEmptyCartModalMessageText() {
+        return emptyCartModalMessage.getText();
     }
 }
 

@@ -32,7 +32,13 @@ public class CartPage extends BasePage {
     @FindBy(xpath = "//div[@class='flex flex-col w-full 2xl:w-[562px] bg-bg-coffee-950 rounded-16 p-4']")
     private WebElement orderComponentRoot;
 
+    @Getter
+    @FindBy(xpath = "//h1")
+    private WebElement orderSuccessfullyPlacedMessage;
 
+    @Getter
+    @FindBy(xpath = "//a[text() = 'На головну']")
+    private WebElement toMainPageButton;
 
     public CartPage(WebDriver driver) {
         super(driver);
