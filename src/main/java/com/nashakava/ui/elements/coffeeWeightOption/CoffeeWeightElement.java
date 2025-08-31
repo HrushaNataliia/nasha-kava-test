@@ -43,7 +43,7 @@ public class CoffeeWeightElement extends BaseElement {
         coffeeWeight.put(CoffeeWeightEnum.WEIGHT_100G, weight100gButton);
         coffeeWeight.put(CoffeeWeightEnum.WEIGHT_150G, weight150gButton);
         coffeeWeight.put(CoffeeWeightEnum.WEIGHT_250G, weight250gButton);
-        coffeeWeight.put(CoffeeWeightEnum.WEIGHT_1KG, getWeight1kgButton());
+        coffeeWeight.put(CoffeeWeightEnum.WEIGHT_1KG, weight1kgButton);
     }
 
     public String getCoffeeWeightText(CoffeeWeightEnum button) {
