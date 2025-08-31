@@ -1,5 +1,6 @@
-package com.nashakava.ui.modal;
+package com.nashakava.ui.component.cartPageComponents;
 
+import com.nashakava.ui.component.BaseComponent;
 import com.nashakava.ui.elements.CartItemElement;
 import com.nashakava.ui.page.CartPage;
 import com.nashakava.ui.page.MainPage;
@@ -8,11 +9,11 @@ import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class CartModal extends BaseModal {
-
+public class OrderComponent extends BaseComponent {
     @Getter
     @FindBy(xpath = ".//li[contains(@class, 'rounded')]")
     private List<WebElement> cartItemElements;
@@ -22,20 +23,17 @@ public class CartModal extends BaseModal {
     private WebElement totalPrice;
 
     @Getter
-    @FindBy(xpath = ".//button[@aria-label= 'Продовжити покупки']")
+    @FindBy(xpath = ".//a[@href= '/']")
     private WebElement continuePurchasesButton;
 
     @Getter
-    @FindBy(xpath = ".//a[@href= '/order']")
-    private WebElement makeOrderButton;
-
-    @Getter
-    @FindBy(xpath = ".//p")
-    private WebElement emptyCartModalMessage;
+    @FindBy(xpath = ".//button[@aria-label= 'Підтвердити замовлення']")
+    private WebElement confirmOrderButton;
 
 
-    public CartModal(WebDriver driver, WebElement rootElement) {
+    public OrderComponent(WebDriver driver, WebElement rootElement) {
         super(driver, rootElement);
+
     }
 
     public List<CartItemElement> getCartItems() {
@@ -66,17 +64,13 @@ public class CartModal extends BaseModal {
         return new MainPage(driver);
     }
 
-    @Step("Click on Make An Order Button")
-    public CartPage clickOnMakeOrderButton() {
-        scrollToElement(makeOrderButton);
-        waitUntilElementClickable(makeOrderButton);
-        makeOrderButton.click();
+    @Step("Click on Confirm An Order Button")
+    public CartPage clickOnConfirmOrderButton() {
+        scrollToElement(confirmOrderButton);
+        waitUntilElementClickable(confirmOrderButton);
+        confirmOrderButton.click();
         return new CartPage(driver);
     }
 
-    public String getEmptyCartModalMessageText() {
-        return emptyCartModalMessage.getText();
-    }
+
 }
-
-
