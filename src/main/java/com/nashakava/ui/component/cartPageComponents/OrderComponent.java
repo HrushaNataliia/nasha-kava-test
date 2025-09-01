@@ -4,6 +4,7 @@ import com.nashakava.ui.component.BaseComponent;
 import com.nashakava.ui.elements.CartItemElement;
 import com.nashakava.ui.page.CartPage;
 import com.nashakava.ui.page.MainPage;
+import com.nashakava.ui.page.OrderSuccessPage;
 import io.qameta.allure.Step;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
@@ -65,11 +66,11 @@ public class OrderComponent extends BaseComponent {
     }
 
     @Step("Click on Confirm An Order Button")
-    public CartPage clickOnConfirmOrderButton() {
+    public OrderSuccessPage clickOnConfirmOrderButton() {
         scrollToElement(confirmOrderButton);
         waitUntilElementClickable(confirmOrderButton);
         confirmOrderButton.click();
-        return new CartPage(driver);
+        return new OrderSuccessPage(driver);
     }
 
 

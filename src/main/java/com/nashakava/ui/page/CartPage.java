@@ -4,6 +4,7 @@ import com.nashakava.ui.component.cartPageComponents.ContactDetailsComponent;
 import com.nashakava.ui.component.cartPageComponents.DeliveryComponent;
 import com.nashakava.ui.component.cartPageComponents.OrderComponent;
 import com.nashakava.ui.component.cartPageComponents.PaymentComponent;
+import io.qameta.allure.Step;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -32,13 +33,8 @@ public class CartPage extends BasePage {
     @FindBy(xpath = "//div[@class='flex flex-col w-full 2xl:w-[562px] bg-bg-coffee-950 rounded-16 p-4']")
     private WebElement orderComponentRoot;
 
-    @Getter
-    @FindBy(xpath = "//h1")
-    private WebElement orderSuccessfullyPlacedMessage;
 
-    @Getter
-    @FindBy(xpath = "//a[text() = 'На головну']")
-    private WebElement toMainPageButton;
+
 
     public CartPage(WebDriver driver) {
         super(driver);
@@ -47,4 +43,6 @@ public class CartPage extends BasePage {
         paymentComponent = new PaymentComponent(driver, paymentComponentRoot);
         orderComponent = new OrderComponent(driver, orderComponentRoot);
     }
+
+
 }
