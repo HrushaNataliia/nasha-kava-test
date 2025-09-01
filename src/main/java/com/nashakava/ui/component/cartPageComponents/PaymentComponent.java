@@ -9,10 +9,10 @@ import org.openqa.selenium.support.FindBy;
 
 public class PaymentComponent extends BaseComponent {
     @Getter
-    @FindBy(xpath = ".//input[@id='Оплата_на_розрахунковий_рахунок_(Monobank);']")
+    @FindBy(xpath = ".//input[@id='Оплата_на_розрахунковий_рахунок_(Monobank);']//../span[@class='checkmark']")
     private WebElement bankTransferRadioButton;
     @Getter
-    @FindBy(xpath = ".//input[@id='Накладеним_платежем_(2_%_від_суми_+_20_грн,_згідно_з_тарифами_Нової_Пошти).']")
+    @FindBy(xpath = ".//input[@id='Накладеним_платежем_(2_%_від_суми_+_20_грн,_згідно_з_тарифами_Нової_Пошти).']//../span[@class='checkmark']")
     private WebElement cashOnDeliveryRadioButton;
 
     public PaymentComponent(WebDriver driver, WebElement rootElement) {
@@ -21,6 +21,7 @@ public class PaymentComponent extends BaseComponent {
 
     @Step("Click on Bank Transfer Radio Button")
     public PaymentComponent clickOnBankTransferRadioButton() {
+        scrollToElement(bankTransferRadioButton);
         waitUntilElementClickable(bankTransferRadioButton);
         bankTransferRadioButton.click();
         return this;
@@ -28,6 +29,7 @@ public class PaymentComponent extends BaseComponent {
 
     @Step("Click on Cash On Delivery Radio Button")
     public PaymentComponent clickOnCashOnDeliveryRadioButton() {
+        scrollToElement(cashOnDeliveryRadioButton);
         waitUntilElementClickable(cashOnDeliveryRadioButton);
         cashOnDeliveryRadioButton.click();
         return this;
