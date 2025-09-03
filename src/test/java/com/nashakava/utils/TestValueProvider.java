@@ -50,4 +50,16 @@ public class TestValueProvider {
         return properties != null ? properties.getProperty("user.name") : System.getenv("USER_NAME");
     }
 
+    public String getCmsUIUrl() {
+        return properties != null ? properties.getProperty("cms.ui.url") : System.getenv("CMS_UI_URL");
+    }
+
+    public String getAdminEmail() {
+        return properties != null ? properties.getProperty("admin.email") : System.getenv("ADMIN_EMAIL");
+    }
+
+    public String getAdminPassword() {
+        return properties != null ? properties.getProperty("admin.password") : System.getenv("ADMIN_PASSWORD");
+    }
+
 }
