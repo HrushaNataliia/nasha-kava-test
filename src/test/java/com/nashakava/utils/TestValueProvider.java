@@ -2,8 +2,6 @@ package com.nashakava.utils;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
 
 public class TestValueProvider {
@@ -15,51 +13,38 @@ public class TestValueProvider {
             properties = new Properties();
             properties.load(fileInputStream);
         } catch (IOException err) {
-            System.out.println(err.getMessage());
-            System.out.println("Use system env");
+            System.out.println("Config.properties not found, using system properties or env variables");
         }
-    }
-
-    private static List<String> stringToList(String input) {
-        List<String> result = new ArrayList<>();
-        if (input == null || input.isEmpty()) {
-            return result;
-        }
-
-        String[] parts = input.split(", ");
-        for (String part : parts) {
-            result.add(part.trim());
-        }
-
-        return result;
     }
 
     public String getBaseUIUrl() {
-        return properties != null ? properties.getProperty("base.ui.url") : System.getenv("BASE_UI_URL");
+        return System.getProperty("base.ui.url",
+                properties != null ? properties.getProperty("base.ui.url") :
+                        System.getenv("BASE_UI_URL"));
     }
 
     public int getImplicitlyWait() {
-        return properties != null ? Integer.parseInt(properties.getProperty("implicitlyWait")) : Integer.parseInt(System.getenv("IMPLICITLY_WAIT"));
-    }
-
-    public String getUserEmail() {
-        return properties != null ? properties.getProperty("user.email") : System.getenv("USER_EMAIL");
-    }
-
-    public String getUserName() {
-        return properties != null ? properties.getProperty("user.name") : System.getenv("USER_NAME");
+        String wait = System.getProperty("implicitlyWait",
+                properties != null ? properties.getProperty("implicitlyWait") :
+                        System.getenv("IMPLICITLY_WAIT"));
+        return wait != null ? Integer.parseInt(wait) : 5;
     }
 
     public String getCmsUIUrl() {
-        return properties != null ? properties.getProperty("cms.ui.url") : System.getenv("CMS_UI_URL");
+        return System.getProperty("cms.ui.url",
+                properties != null ? properties.getProperty("cms.ui.url") :
+                        System.getenv("CMS_UI_URL"));
     }
 
     public String getAdminEmail() {
-        return properties != null ? properties.getProperty("admin.email") : System.getenv("ADMIN_EMAIL");
+        return System.getProperty("admin.email",
+                properties != null ? properties.getProperty("admin.email") :
+                        System.getenv("ADMIN_EMAIL"));
     }
 
     public String getAdminPassword() {
-        return properties != null ? properties.getProperty("admin.password") : System.getenv("ADMIN_PASSWORD");
+        return System.getProperty("admin.password",
+                properties != null ? properties.getProperty("admin.password") :
+                        System.getenv("ADMIN_PASSWORD"));
     }
-
 }
