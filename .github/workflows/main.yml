@@ -67,6 +67,12 @@ jobs:
           mvn clean test \
             -Dwebdriver.chrome.driver=$(which chromedriver) \
             -Dchrome.options="--no-sandbox,--headless=new,--disable-gpu,--window-size=1920,1080,--force-device-scale-factor=0.5,--disable-dev-shm-usage,--remote-allow-origins=*" \
+            -Dbase.ui.url=${{ secrets.BASE_UI_URL }} \
+            -Dcms.ui.url=${{ secrets.CMS_UI_URL }} \
+            -Dadmin.email=${{ secrets.ADMIN_EMAIL }} \
+            -Dadmin.password=${{ secrets.ADMIN_PASSWORD }} \
+            -Duser.email=${{ secrets.USER_EMAIL }} \
+            -Duser.name=${{ secrets.USER_NAME }}
         continue-on-error: true
 
       - name: Upload allure-results
@@ -106,6 +112,6 @@ jobs:
       - name: Deploy report to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.DEPLOY_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
           publish_dir: allure-report
