@@ -1,12 +1,10 @@
 package com.nashakava.ui.testrunners;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.time.Duration;
-import java.util.UUID;
 import com.nashakava.utils.LocalStorageJS;
 import com.nashakava.utils.TestValueProvider;
+import io.github.bonigarcia.wdm.WebDriverManager;
+import io.qameta.allure.Attachment;
+import io.qameta.allure.Step;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -15,12 +13,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
-import io.qameta.allure.Attachment;
-import io.qameta.allure.Step;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.time.Duration;
+import java.util.UUID;
 
 @Listeners({io.qameta.allure.testng.AllureTestNg.class})
-public class BaseTestRunner {
+public class CmsTestRunner {
 
     protected static LocalStorageJS localStorageJS;
     protected static WebDriver driver;
@@ -60,7 +60,7 @@ public class BaseTestRunner {
         if (driver == null) {
             initDriver();
         }
-        driver.get(testValueProvider.getBaseUIUrl());
+        driver.get(testValueProvider.getCmsUIUrl());
     }
 
     @AfterClass
