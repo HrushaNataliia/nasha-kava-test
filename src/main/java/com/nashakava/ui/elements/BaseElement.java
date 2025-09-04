@@ -16,4 +16,12 @@ public abstract class BaseElement extends Base {
         this.rootElement = rootElement;
         PageFactory.initElements(new DefaultElementLocatorFactory(rootElement), this);
     }
+
+    public WebElement getRootElement() {
+        return rootElement;
+    }
+
+    public void click() {
+        rootElement.click();
+    }
 }

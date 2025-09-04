@@ -1,6 +1,7 @@
 package com.nashakava.ui.cms.page;
 
 
+import com.nashakava.ui.component.cartPageComponents.ContactDetailsComponent;
 import com.nashakava.ui.page.BasePage;
 import com.nashakava.ui.page.CartPage;
 import io.qameta.allure.Step;
@@ -38,6 +39,38 @@ public class LogInPage extends BasePage {
         emailPasswordButton.click();
         return this;
     }
+
+    @Step("Click on Login Button")
+    public LogInPage clickOnNextButton() {
+        waitUntilElementClickable(loginButton);
+        loginButton.click();
+        return this;
+    }
+
+    @Step("Set Email Input {email}")
+    public LogInPage enterEmail(String email) {
+        waitUntilElementVisible(emailInput);
+        emailInput.sendKeys(email);
+        return this;
+    }
+
+    @Step("Set Password Input {password}")
+    public LogInPage enterPassword(String password) {
+        waitUntilElementClickable(passwordInput);
+        passwordInput.sendKeys(password);
+        return this;
+    }
+
+    @Step("Click on Login Button")
+    public BaseCmsPage clickOnLoginButton() {
+        waitUntilElementClickable(loginButton);
+        loginButton.click();
+        return new BaseCmsPage(driver);
+    }
+
+
+
+
 
 
 }
