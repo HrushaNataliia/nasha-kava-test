@@ -31,8 +31,9 @@ public class OrderSuccessPage extends BasePage{
 
     @Step("Click on To Main Page Button")
     public MainPage clickOnToMainPageButton() {
+        scrollToElement(toMainPageButton);
         waitUntilElementClickable(toMainPageButton);
-        toMainPageButton.click();
+        clickDynamicElement(toMainPageButton);
         return new MainPage(driver);
     }
 

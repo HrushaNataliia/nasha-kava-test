@@ -12,7 +12,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -35,10 +34,10 @@ public class BaseTestRunner {
 
     @Step("Initialize ChromeDriver for CI")
     public void initDriver() {
-        if (driver != null) return; // якщо драйвер вже існує, не створювати новий
+        if (driver != null) return;
 
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless=new"); // можна розкоментувати для CI
+        options.addArguments("--headless=new");
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--disable-gpu");
@@ -54,10 +53,6 @@ public class BaseTestRunner {
         localStorageJS = new LocalStorageJS(driver);
     }
 
-    /**
-     * Універсальний beforeClass для всіх типів сайтів.
-     * Якщо потрібно, можна передавати siteType = "cms" або "base"
-     */
     @Parameters({"siteType"})
     @BeforeClass
     public void beforeClass(@Optional("base") String siteType) {
@@ -73,7 +68,6 @@ public class BaseTestRunner {
     @AfterClass
     public void afterClass(ITestContext context) {
         takeScreenshot("PICTURE Test Name = " + context.getName());
-        // драйвер не закривається тут, щоб можна було продовжити роботу в одному браузері
     }
 
     @AfterSuite

@@ -28,7 +28,7 @@ public class CartItemElement extends BaseElement {
     @FindBy(xpath = ".//button[@aria-label= 'Збільшити кількість']")
     private WebElement plusButton;
     @Getter
-    @FindBy(xpath = ".//button[@aria-label= 'Видалити з кошика']")
+    @FindBy(xpath = ".//button[@aria-label= 'Видалити з корзини']")
     private WebElement removeButton;
 
     public CartItemElement(WebDriver driver, WebElement rootElement) {

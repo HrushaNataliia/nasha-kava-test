@@ -11,6 +11,7 @@ import com.nashakava.ui.page.OrderSuccessPage;
 import com.nashakava.ui.testrunners.BaseTestRunner;
 import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
+import io.qameta.allure.Issue;
 import io.qameta.allure.Owner;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -37,6 +38,7 @@ public class CmsTest extends BaseTestRunner {
     @Test
     @Description("Verify order is visible in CMS after successful placement")
     @Feature("E2E Order Flow")
+    @Issue("17")
     @Owner("Hrusha Nataliia")
     public void verifyOrderAppearsInCmsAfterPlacement() {
         SoftAssert softAssert = new SoftAssert();
@@ -58,6 +60,7 @@ public class CmsTest extends BaseTestRunner {
         header.navigateToCartModal(mainPage);
 
         CartItemElement cartItemElement = mainPage.getCartModal().findItemByName(COFFEE_NAME);
+
         ITEM_TITLE = cartItemElement.getItemNameText();
         ITEM_DESCRIPTION = cartItemElement.getItemDescriptionText();
         ITEM_COST = cartItemElement.getItemPrice().getText().replaceAll("[^0-9]", "");

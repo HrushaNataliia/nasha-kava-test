@@ -23,7 +23,7 @@ public class HeaderComponent extends BaseComponent {
     public CartModal cartModal;
 
     @Getter
-    @FindBy(xpath = ".//img[@alt='Логотип']")
+    @FindBy(xpath = ".//img[contains(@alt,'Логотип')]")
     private WebElement logoNashaKava;
 
     @Getter
@@ -47,7 +47,7 @@ public class HeaderComponent extends BaseComponent {
     private WebElement cartButton;
 
     @Getter
-    @FindBy(xpath = ".//button[@aria-label='Корзина']/span")
+    @FindBy(xpath = ".//button[@aria-label='Відкрити корзину з товарами']/span")
     private WebElement cartCounter;
 
     @Getter

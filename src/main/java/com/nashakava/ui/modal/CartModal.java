@@ -75,6 +75,7 @@ public class CartModal extends BaseModal {
     }
 
     public String getEmptyCartModalMessageText() {
+        waitUntilElementVisible(emptyCartModalMessage);
         return emptyCartModalMessage.getText();
     }
 }

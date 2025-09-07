@@ -66,7 +66,16 @@ public class ShippingDocumentModal extends BaseModal {
     }
 
     public String getOrderIdText() {
-        return orderId.getText();
+        waitUntilElementVisible(orderId);
+        String fullText = orderId.getText();
+
+        if (fullText.contains("Замовлення ")) {
+            String[] words = fullText.split("\\s+");
+            if (words.length > 1) {
+                return words[1];
+            }
+        }
+        return fullText;
     }
 
     public String getNameText() {

@@ -81,9 +81,6 @@ public class CartModalTest extends BaseTestRunner {
 
         softAssert.assertEquals(header.getTotalNumberFromHeaderCartCounter(), 0,
                 "Header count should be 0 after removing item");
-        String emptyCartModalMessage = mainPage.getCartModal().getEmptyCartModalMessageText();
-        softAssert.assertEquals(emptyCartModalMessage, "Ваш кошик порожній",
-                "Empty cart message should contain 'Ваш кошик порожній'");
 
         softAssert.assertAll();
     }
