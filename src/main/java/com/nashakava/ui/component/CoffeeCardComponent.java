@@ -33,7 +33,7 @@ public class CoffeeCardComponent extends BaseComponent {
     @FindBy(xpath = ".//button[@aria-label= 'Збільшити кількість']")
     private WebElement plusButton;
     @Getter
-    @FindBy(xpath = ".//button[@aria-label='Купити кофе']")
+    @FindBy(xpath = ".//button[contains(@aria-label, 'Додати в корзину каву')]")
     private WebElement buyButton;
     @Getter
     @FindBy(xpath = ".//button[@aria-label= 'Вибрати варіант помелу кави']")

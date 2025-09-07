@@ -62,8 +62,8 @@ public class CartPageTest extends BaseTestRunner {
                 .clickOnConfirmOrderButton();
 
         String successMessage = orderSuccessPage.getOrderSuccessMessageText();
-        softAssert.assertEquals(successMessage, "Замовлення успішно оформлене",
-                "Order confirmation message should contain 'Замовлення успішно оформлене'");
+        softAssert.assertEquals(successMessage, "Дякуємо за Ваш вибір!",
+                "Order confirmation message should contain 'Дякуємо за Ваш вибір!'");
 
         MainPage redirectedMainPage = orderSuccessPage.clickOnToMainPageButton();
 
