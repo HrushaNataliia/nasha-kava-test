@@ -1,12 +1,10 @@
 package com.nashakava.ui.testrunners;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.time.Duration;
-import java.util.UUID;
 import com.nashakava.utils.LocalStorageJS;
 import com.nashakava.utils.TestValueProvider;
+import io.github.bonigarcia.wdm.WebDriverManager;
+import io.qameta.allure.Attachment;
+import io.qameta.allure.Step;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -15,9 +13,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
-import io.qameta.allure.Attachment;
-import io.qameta.allure.Step;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.time.Duration;
+import java.util.UUID;
 
 @Listeners({io.qameta.allure.testng.AllureTestNg.class})
 public class BaseTestRunner {
@@ -35,49 +35,53 @@ public class BaseTestRunner {
 
     @Step("Initialize ChromeDriver for CI")
     public void initDriver() {
+        if (driver != null) return; // якщо драйвер вже існує, не створювати новий
+
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless=new");
+        options.addArguments("--headless=new"); // можна розкоментувати для CI
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--disable-gpu");
         options.addArguments("--disable-extensions");
         options.addArguments("--disable-infobars");
         options.addArguments("--disable-animations");
-
         options.addArguments("--lang=en");
         options.addArguments("--window-size=1920,1080");
-
         options.addArguments("--user-data-dir=/tmp/chrome-" + UUID.randomUUID());
 
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(testValueProvider.getImplicitlyWait()));
-
         localStorageJS = new LocalStorageJS(driver);
     }
 
+    /**
+     * Універсальний beforeClass для всіх типів сайтів.
+     * Якщо потрібно, можна передавати siteType = "cms" або "base"
+     */
+    @Parameters({"siteType"})
     @BeforeClass
-    public void beforeClass() {
-        if (driver == null) {
-            initDriver();
+    public void beforeClass(@Optional("base") String siteType) {
+        initDriver();
+
+        if ("cms".equalsIgnoreCase(siteType)) {
+            driver.get(testValueProvider.getCmsUIUrl());
+        } else {
+            driver.get(testValueProvider.getBaseUIUrl());
         }
-        driver.get(testValueProvider.getBaseUIUrl());
     }
 
     @AfterClass
     public void afterClass(ITestContext context) {
         takeScreenshot("PICTURE Test Name = " + context.getName());
-        if (driver != null) {
-            driver.quit();
-        }
-        driver = null;
+        // драйвер не закривається тут, щоб можна було продовжити роботу в одному браузері
     }
 
     @AfterSuite
     public void afterSuite() {
         if (driver != null) {
             driver.quit();
+            driver = null;
         }
-        driver = null;
     }
 
     @Step("Clear Browser Memory: Cookies and LocalStorage")
@@ -102,7 +106,6 @@ public class BaseTestRunner {
     public WebElement waitUntilElementClickable(By locator, int timeoutSeconds) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutSeconds));
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(locator));
-
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
         return element;
     }

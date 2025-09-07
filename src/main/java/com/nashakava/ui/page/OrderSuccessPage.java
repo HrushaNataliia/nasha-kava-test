@@ -9,12 +9,16 @@ import org.openqa.selenium.support.FindBy;
 public class OrderSuccessPage extends BasePage{
 
     @Getter
-    @FindBy(xpath = "//h1[text()='Замовлення успішно оформлене']")
+    @FindBy(xpath = "//h2[text()='Дякуємо за Ваш вибір!']")
     private WebElement orderSuccessMessage;
 
     @Getter
     @FindBy(xpath = "//a[text() = 'На головну']")
     private WebElement toMainPageButton;
+
+    @Getter
+    @FindBy(xpath = "//span[@class='text-[var(--coffee_accent)]']")
+    private WebElement orderId;
 
     public OrderSuccessPage(WebDriver driver) {
         super(driver);
@@ -31,4 +35,10 @@ public class OrderSuccessPage extends BasePage{
         toMainPageButton.click();
         return new MainPage(driver);
     }
+
+    public String getOrderIdText() {
+        waitUntilElementVisible(orderId);
+        return orderId.getText();
+    }
+
 }

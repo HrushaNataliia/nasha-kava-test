@@ -1,14 +1,13 @@
 package com.nashakava.ui;
 
-import com.nashakava.ui.cms.modal.ShippingDocumentModal;
 import com.nashakava.ui.cms.page.LogInPage;
 import com.nashakava.ui.cms.page.OrdersPage;
-import com.nashakava.ui.testrunners.CmsTestRunner;
+import com.nashakava.ui.testrunners.BaseTestRunner;
 import org.testng.annotations.Test;
 
 
 
-public class BaseTest extends CmsTestRunner {
+public class BaseTest extends BaseTestRunner {
 
     @Test
     public void crmFirstTest() {

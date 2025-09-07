@@ -47,14 +47,14 @@ public class LogInPage extends BasePage {
         return this;
     }
 
-    @Step("Set Email Input {email}")
+    @Step("Set Email Input")
     public LogInPage enterEmail(String email) {
         waitUntilElementVisible(emailInput);
         emailInput.sendKeys(email);
         return this;
     }
 
-    @Step("Set Password Input {password}")
+    @Step("Set Password Input")
     public LogInPage enterPassword(String password) {
         waitUntilElementClickable(passwordInput);
         passwordInput.sendKeys(password);

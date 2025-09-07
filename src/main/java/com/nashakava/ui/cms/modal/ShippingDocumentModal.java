@@ -36,6 +36,31 @@ public class ShippingDocumentModal extends BaseModal {
     @FindBy(xpath = ".//strong[contains(text(), 'Оплата:')]/..")
     private WebElement payment;
 
+    @Getter
+    @FindBy(xpath = ".//td[@data-testid='item-title']")
+    private WebElement itemTitle;
+
+    @Getter
+    @FindBy(xpath = ".//td[@data-testid='item-desc']")
+    private WebElement itemDescription;
+
+    @Getter
+    @FindBy(xpath = ".//td[@data-testid='item-cost']")
+    private WebElement itemCost;
+
+    @Getter
+    @FindBy(xpath = ".//td[@data-testid='item-count']")
+    private WebElement itemCount;
+
+    @Getter
+    @FindBy(xpath = ".//td[@data-testid='item-sum']")
+    private WebElement itemSum;
+
+    @Getter
+    @FindBy(xpath = ".//td[@data-testid='total-sum']")
+    private WebElement totalSum;
+
+
     public ShippingDocumentModal(WebDriver driver, WebElement rootElement) {
         super(driver, rootElement);
     }
@@ -66,5 +91,29 @@ public class ShippingDocumentModal extends BaseModal {
 
     public String getPaymentText() {
         return payment.getText();
+    }
+
+    public String getItemTitleText() {
+        return itemTitle.getText();
+    }
+
+    public String getItemDescriptionText() {
+        return itemDescription.getText();
+    }
+
+    public String getItemCostText() {
+        return itemCost.getText();
+    }
+
+    public String getItemCountText() {
+        return itemCount.getText();
+    }
+
+    public String getItemSumText() {
+        return itemSum.getText();
+    }
+
+    public String getTotalSumText() {
+        return totalSum.getText();
     }
 }

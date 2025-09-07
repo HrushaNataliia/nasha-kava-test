@@ -21,7 +21,7 @@ public class OrdersPage extends BaseCmsPage{
     private List<WebElement> orderRows;
 
     @Getter
-    @FindBy(xpath = "//div[@id='radix-:rr:']")
+    @FindBy(xpath = "//div[@role='dialog' and @data-state='open']")
     private WebElement shippingDocumentModalRoot;
 
 
@@ -56,7 +56,7 @@ public class OrdersPage extends BaseCmsPage{
     @Step("Click on order with id: {orderId}")
     public ShippingDocumentModal clickOrderById(String orderId) {
         OrderRowElement orderElement = findItemById(orderId);
-        clickDynamicElement(orderElement.getRootElement());
+        orderElement.clickOnEditButton();
         return new ShippingDocumentModal(driver, shippingDocumentModalRoot);
     }
 }
