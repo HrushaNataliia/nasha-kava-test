@@ -68,6 +68,10 @@ public class BaseTestRunner {
     @AfterClass
     public void afterClass(ITestContext context) {
         takeScreenshot("PICTURE Test Name = " + context.getName());
+        if (driver != null) {
+            driver.quit();
+            driver = null;
+        }
     }
 
     @AfterSuite
