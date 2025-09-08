@@ -68,6 +68,7 @@ public class BaseTestRunner {
     @AfterClass
     public void afterClass(ITestContext context) {
         takeScreenshot("PICTURE Test Name = " + context.getName());
+        clearBrowserMemory();
         if (driver != null) {
             driver.quit();
             driver = null;

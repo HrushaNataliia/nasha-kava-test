@@ -32,7 +32,7 @@ public class CartModalTest extends BaseTestRunner {
         header
                 .clickOnCatalogButton()
                 .navigateToCoffeeSection(mainPage)
-                .getCoffeeCardByName("Brazil Decaf")
+                .getCoffeeCardByName("Brazil Sul de Minas")
                 .clickOnBuyButton();
 
         int countAfterFirstAdding = header.getTotalNumberFromHeaderCartCounter();
@@ -43,19 +43,19 @@ public class CartModalTest extends BaseTestRunner {
 
         header.navigateToCartModal(mainPage);
 
-        CartItemElement cartItemElement = mainPage.getCartModal().findItemByName("Brazil Decaf");
+        CartItemElement cartItemElement = mainPage.getCartModal().findItemByName("Brazil Sul de Minas");
 
-        softAssert.assertNotNull(cartItemElement, "Brazil Decaf should be found in cart");
-        softAssert.assertEquals(cartItemElement.getItemNameText(), "Brazil Decaf",
+        softAssert.assertNotNull(cartItemElement, "Brazil Sul de Minas should be found in cart");
+        softAssert.assertEquals(cartItemElement.getItemNameText(), "Brazil Sul de Minas",
                 "Item name should match");
         softAssert.assertEquals(cartItemElement.getItemDescriptionText(), "Турка, 100г",
                 "Item description should match");
         softAssert.assertEquals(cartItemElement.getItemQuantity().getAttribute("value"), "1",
                 "Initial quantity should be 1");
         String itemPrice = cartItemElement.getItemPrice().getText();
-        softAssert.assertTrue(itemPrice.contains("145"), "Price should be 145");
+        softAssert.assertTrue(itemPrice.contains("180"), "Price should be 180");
         String totalPrice = mainPage.getCartModal().getTotalPrice().getText();
-        softAssert.assertTrue(totalPrice.contains("145"), "Total should be 145");
+        softAssert.assertTrue(totalPrice.contains("180"), "Total should be 180");
 
         cartItemElement.clickOnPlusButton();
         softAssert.assertEquals(header.getTotalNumberFromHeaderCartCounter(), 1,
@@ -63,9 +63,9 @@ public class CartModalTest extends BaseTestRunner {
         softAssert.assertEquals(cartItemElement.getItemQuantity().getAttribute("value"), "2",
                 "Quantity should be 2 after clicking plus button");
         String itemPriceAfterAdding = cartItemElement.getItemPrice().getText();
-        softAssert.assertTrue(itemPriceAfterAdding.contains("145"), "Price should still be 145");
+        softAssert.assertTrue(itemPriceAfterAdding.contains("180"), "Price should still be 180");
         String totalPriceAfterAdding = mainPage.getCartModal().getTotalPrice().getText();
-        softAssert.assertTrue(totalPriceAfterAdding.contains("290"), "Total should be 290");
+        softAssert.assertTrue(totalPriceAfterAdding.contains("360"), "Total should be 360");
 
         cartItemElement.clickOnMinusButton();
         softAssert.assertEquals(header.getTotalNumberFromHeaderCartCounter(), 1,
@@ -73,9 +73,9 @@ public class CartModalTest extends BaseTestRunner {
         softAssert.assertEquals(cartItemElement.getItemQuantity().getAttribute("value"), "1",
                 "Quantity should be 1 after clicking minus button");
         String itemPriceAfterSubtraction = cartItemElement.getItemPrice().getText();
-        softAssert.assertTrue(itemPriceAfterSubtraction.contains("145"), "Price should still be 145");
+        softAssert.assertTrue(itemPriceAfterSubtraction.contains("180"), "Price should still be 180");
         String totalPriceAfterSubtraction = mainPage.getCartModal().getTotalPrice().getText();
-        softAssert.assertTrue(totalPriceAfterSubtraction.contains("145"), "Total should be back to 145");
+        softAssert.assertTrue(totalPriceAfterSubtraction.contains("180"), "Total should be back to 180");
 
         cartItemElement.clickOnRemoveButton();
 

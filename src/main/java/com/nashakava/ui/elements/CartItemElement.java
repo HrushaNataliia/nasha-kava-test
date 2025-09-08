@@ -16,16 +16,16 @@ public class CartItemElement extends BaseElement {
     @FindBy(xpath = ".//p[@class= 'text-body-12r font-medium']")
     private WebElement itemDescription;
     @Getter
-    @FindBy(xpath = ".//input[@aria-label= 'Кількість']")
+    @FindBy(xpath = ".//input[contains(@aria-label, 'Кількість')]")
     private WebElement itemQuantity;
     @Getter
     @FindBy(xpath = ".//p[@class= 'text-body-16s font-semibold text-nowrap']")
     private WebElement itemPrice;
     @Getter
-    @FindBy(xpath = ".//button[@aria-label= 'Зменшити кількість']")
+    @FindBy(xpath = ".//button[contains(@aria-label, 'Зменшити кількість')]")
     private WebElement minusButton;
     @Getter
-    @FindBy(xpath = ".//button[@aria-label= 'Збільшити кількість']")
+    @FindBy(xpath = ".//button[contains(@aria-label, 'Збільшити кількість')]")
     private WebElement plusButton;
     @Getter
     @FindBy(xpath = ".//button[@aria-label= 'Видалити з корзини']")

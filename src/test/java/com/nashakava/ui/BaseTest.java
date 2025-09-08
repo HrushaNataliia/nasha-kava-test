@@ -11,6 +11,7 @@ public class BaseTest extends BaseTestRunner {
 
     @Test
     public void crmFirstTest() {
+        driver.get(testValueProvider.getCmsUIUrl());
         LogInPage loginPage = new LogInPage(driver);
 
         OrdersPage ordersPage = loginPage.clickOnEmailPasswordButton()

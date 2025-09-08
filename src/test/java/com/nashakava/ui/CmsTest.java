@@ -18,8 +18,8 @@ import org.testng.asserts.SoftAssert;
 
 public class CmsTest extends BaseTestRunner {
 
-    private static final String COFFEE_NAME = "Brazil Decaf";
-    private static final String CUSTOMER_NAME = "Test User";
+    private static final String COFFEE_NAME = "Brazil Sul de Minas";
+    private static final String CUSTOMER_NAME = "Auto Test";
     private static final String CUSTOMER_PHONE = "501234567";
     private static final String DELIVERY_COMMENT = "Доставити після 18:00";
     private static final String UKLON_ADDRESS = "м. Миколаїв, вул. Сінна 23";

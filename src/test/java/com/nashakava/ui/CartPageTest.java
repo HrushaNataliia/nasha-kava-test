@@ -20,7 +20,7 @@ public class CartPageTest extends BaseTestRunner {
     @Feature("Cart Page")
     @Issue("11")
     @Owner("Hrusha Nataliia")
-    public void verifySuccessfulOrderPlacementWithValidData() {
+    public void verifySuccessfulOrderPlacementWithValidData() throws InterruptedException {
         SoftAssert softAssert = new SoftAssert();
         MainPage mainPage = new MainPage(driver);
         HeaderComponent header = mainPage
@@ -34,7 +34,7 @@ public class CartPageTest extends BaseTestRunner {
         header
                 .clickOnCatalogButton()
                 .navigateToCoffeeSection(mainPage)
-                .getCoffeeCardByName("Brazil Decaf")
+                .getCoffeeCardByName("Brazil Sul de Minas")
                 .clickOnBuyButton();
 
         int countAfterFirstAdding = header.getTotalNumberFromHeaderCartCounter();
@@ -46,6 +46,7 @@ public class CartPageTest extends BaseTestRunner {
         header.navigateToCartModal(mainPage);
 
         CartPage cartPage = mainPage.getCartModal().clickOnMakeOrderButton();
+        Thread.sleep(3000);
 
         cartPage.getContactDetailsComponent()
                 .enterName("Test User")

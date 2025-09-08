@@ -28,7 +28,7 @@ public class OrderComponent extends BaseComponent {
     private WebElement continuePurchasesButton;
 
     @Getter
-    @FindBy(xpath = ".//button[@aria-label= 'Підтвердити замовлення']")
+    @FindBy(xpath = ".//button[contains(@aria-label, 'Підтвердити замовлення')]")
     private WebElement confirmOrderButton;
 
 

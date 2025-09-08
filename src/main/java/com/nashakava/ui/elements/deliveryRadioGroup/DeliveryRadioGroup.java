@@ -13,8 +13,8 @@ public class DeliveryRadioGroup extends BaseComponent {
     private final Map<DeliveryRadioGroupEnum, WebElement> deliveryRadioButtons = new EnumMap<>(DeliveryRadioGroupEnum.class);
 
     @Getter
-    @FindBy(xpath = ".//input[@id='Самовивіз_з_нашого_магазину(м._Миколаїв,_вул._Сінна_23)_-_безкоштовно;']/../span[@class='checkmark']")
-    private WebElement storePickupRadioButton;
+    @FindBy(xpath = ".//input[contains(@id, 'Самовивіз')]/../span[@class='checkmark']")
+    private WebElement storePickupRadioButton; //input[contains(@id, 'Самовивіз')]/../span[@class='checkmark']
     @Getter
     @FindBy(xpath = ".//input[@id='Таксі_Уклон_по_м._Миколаєву']/../span[@class='checkmark']")
     private WebElement uklonTaxiRadioButton;

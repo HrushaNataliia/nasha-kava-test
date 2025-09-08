@@ -13,7 +13,7 @@ public class DeliveryComponent extends BaseComponent {
     public DeliveryRadioGroup deliveryRadioGroup;
 
     @Getter
-    @FindBy(xpath = ".//div[@aria-labelledby='Спосіб Доставки']")
+    @FindBy(xpath = ".//div[@aria-labelledby='Виберіть спосіб доставки']")
     private WebElement deliveryRadioGroupRoot;
     @Getter
     @FindBy(xpath = ".//input[@name='uklon']")
