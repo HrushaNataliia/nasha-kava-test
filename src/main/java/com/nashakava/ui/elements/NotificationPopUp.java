@@ -1,5 +1,7 @@
 package com.nashakava.ui.elements;
 
+import com.nashakava.ui.page.BasePage;
+import io.qameta.allure.Step;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -42,6 +44,29 @@ public class NotificationPopUp extends BaseElement{
     public void waitInvisibleAddedToCartNotificationText(){
         waitUntilElementInvisible(addedToCartNotification);
     }
+
+    @Step("Click on Accept Cookies Notification ")
+    public NotificationPopUp clickOnAcceptCookiesNotification() {
+        waitUntilElementClickable(acceptCookiesNotification);
+        acceptCookiesNotification.click();
+        return this;
+    }
+
+    @Step("Click on Added To Cart Notification")
+    public NotificationPopUp clickOnAddedToCartNotification() {
+        waitUntilElementClickable(addedToCartNotification);
+        addedToCartNotification.click();
+        return this;
+    }
+
+    @Step("Click on Removal From Cart Notification")
+    public NotificationPopUp clickOnRemovalFromCartNotification() {
+        waitUntilElementClickable(removalFromCartNotification);
+        removalFromCartNotification.click();
+        return this;
+    }
+
+
 
 
 
