@@ -13,36 +13,33 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Issue;
 import io.qameta.allure.Owner;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 public class CmsTest extends BaseTestRunner {
 
     private static final String COFFEE_NAME = "Brazil Sul de Minas";
-    private static final String CUSTOMER_NAME = "Auto Test";
+    private static final String CUSTOMER_NAME = "Auto CmsTest";
     private static final String CUSTOMER_PHONE = "501234567";
     private static final String DELIVERY_COMMENT = "Доставити після 18:00";
     private static final String UKLON_ADDRESS = "м. Миколаїв, вул. Сінна 23";
     private static final String EXPECTED_SUCCESS_MESSAGE = "Дякуємо за Ваш вибір!";
-    private static String ORDER_ID = "";
     private static final String EXPECTED_DELIVERY_TYPE = "Таксі Уклон по м. Миколаєву";
     private static final String EXPECTED_PAYMENT_TYPE = "Оплата на розрахунковий рахунок (Monobank)";
+    private static final String ATTRIBUTE_VALUE = "value";
 
-    private static String ITEM_TITLE = "";
-    private static String ITEM_DESCRIPTION = "";
-    private static String ITEM_COST = "";
-    private static String ITEM_COUNT = "";
-    private static String ITEM_SUM = "";
-    private static String TOTAL_SUM = "";
+    private String ORDER_ID = "";
+    private String ITEM_TITLE = "";
+    private String ITEM_DESCRIPTION = "";
+    private String ITEM_COST = "";
+    private String ITEM_COUNT = "";
+    private String ITEM_SUM = "";
+    private String TOTAL_SUM = "";
 
-    @Test
-    @Description("Verify order is visible in CMS after successful placement")
-    @Feature("E2E Order Flow")
-    @Issue("17")
-    @Owner("Hrusha Nataliia")
-    public void verifyOrderAppearsInCmsAfterPlacement() {
-        SoftAssert softAssert = new SoftAssert();
-
+    @BeforeMethod
+    @Description("Setup: Add product to cart, place order and capture order details")
+    public void setupOrderAndCaptureDetails() {
         MainPage mainPage = new MainPage(driver);
         HeaderComponent header = mainPage
                 .getCookiesModal()
@@ -54,8 +51,7 @@ public class CmsTest extends BaseTestRunner {
                 .getCoffeeCardByName(COFFEE_NAME)
                 .clickOnBuyButton();
 
-        mainPage.getNotificationPopUp().waitInvisibleCookiesNotification();
-        mainPage.getNotificationPopUp().waitInvisibleAddedToCartNotificationText();
+        mainPage.getNotificationPopUp().clickOnAcceptCookiesNotification();
 
         header.navigateToCartModal(mainPage);
 
@@ -64,10 +60,9 @@ public class CmsTest extends BaseTestRunner {
         ITEM_TITLE = cartItemElement.getItemNameText();
         ITEM_DESCRIPTION = cartItemElement.getItemDescriptionText();
         ITEM_COST = cartItemElement.getItemPrice().getText().replaceAll("[^0-9]", "");
-        ITEM_COUNT = cartItemElement.getItemQuantity().getAttribute("value");
+        ITEM_COUNT = cartItemElement.getItemQuantity().getAttribute(ATTRIBUTE_VALUE);
         ITEM_SUM = cartItemElement.getItemPrice().getText().replaceAll("[^0-9]", "");
         TOTAL_SUM = mainPage.getCartModal().getTotalPrice().getText().replaceAll("[^0-9]", "");
-
 
         CartPage cartPage = mainPage.getCartModal().clickOnMakeOrderButton();
         cartPage.getContactDetailsComponent()
@@ -85,13 +80,24 @@ public class CmsTest extends BaseTestRunner {
         OrderSuccessPage orderSuccessPage = cartPage.getOrderComponent()
                 .clickOnConfirmOrderButton();
 
-        softAssert.assertEquals(
+        SoftAssert setupAssert = new SoftAssert();
+        setupAssert.assertEquals(
                 orderSuccessPage.getOrderSuccessMessageText(),
                 EXPECTED_SUCCESS_MESSAGE,
-                "Success message should be shown"
+                "Success message should be shown during setup"
         );
+        setupAssert.assertAll();
 
         ORDER_ID = orderSuccessPage.getOrderIdText();
+    }
+
+    @Test
+    @Description("Verify order is visible in CMS after successful placement")
+    @Feature("E2E Order Flow")
+    @Issue("17")
+    @Owner("Hrusha Nataliia")
+    public void verifyOrderAppearsInCmsAfterPlacement() {
+        SoftAssert softAssert = new SoftAssert();
 
         driver.get(testValueProvider.getCmsUIUrl());
 
@@ -109,7 +115,7 @@ public class CmsTest extends BaseTestRunner {
         softAssert.assertTrue(
                 shippingDocumentModal.getOrderIdText().contains(ORDER_ID),
                 "Order ID in shipping document should match table. Document: " +
-                        shippingDocumentModal.getOrderIdText() + ", Table: " +ORDER_ID
+                        shippingDocumentModal.getOrderIdText() + ", Table: " + ORDER_ID
         );
 
         softAssert.assertTrue(
@@ -185,7 +191,6 @@ public class CmsTest extends BaseTestRunner {
                 "Total sum should match. Expected: " + TOTAL_SUM +
                         ", Actual: " + shippingDocumentModal.getTotalSumText()
         );
-
 
         softAssert.assertAll();
     }

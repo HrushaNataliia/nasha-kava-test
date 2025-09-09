@@ -15,12 +15,23 @@ import org.testng.asserts.SoftAssert;
 
 public class CartPageTest extends BaseTestRunner {
 
+    private static final String COFFEE_NAME = "Brazil Sul de Minas";
+    private static final String CUSTOMER_NAME = "Auto CartPageTest";
+    private static final String CUSTOMER_PHONE = "501234567";
+    private static final String DELIVERY_COMMENT = "Доставити після 18:00";
+    private static final String UKLON_ADDRESS = "м. Миколаїв, вул. Сінна 23";
+    private static final String EXPECTED_SUCCESS_MESSAGE = "Дякуємо за Ваш вибір!";
+
+    private static final int INITIAL_CART_COUNT = 0;
+    private static final int COUNT_AFTER_ADDING = 1;
+
+
     @Test
     @Description("Verify successful order placement with valid contact, delivery, and payment details")
     @Feature("Cart Page")
     @Issue("11")
     @Owner("Hrusha Nataliia")
-    public void verifySuccessfulOrderPlacementWithValidData() throws InterruptedException {
+    public void verifySuccessfulOrderPlacementWithValidData() {
         SoftAssert softAssert = new SoftAssert();
         MainPage mainPage = new MainPage(driver);
         HeaderComponent header = mainPage
@@ -29,32 +40,30 @@ public class CartPageTest extends BaseTestRunner {
                 .getHeader();
 
         int initialCount = header.getTotalNumberFromHeaderCartCounter();
-        softAssert.assertEquals(initialCount, 0, "Initial counter should be 0");
+        softAssert.assertEquals(initialCount, INITIAL_CART_COUNT, "Initial counter should be 0");
 
         header
                 .clickOnCatalogButton()
                 .navigateToCoffeeSection(mainPage)
-                .getCoffeeCardByName("Brazil Sul de Minas")
+                .getCoffeeCardByName(COFFEE_NAME)
                 .clickOnBuyButton();
 
         int countAfterFirstAdding = header.getTotalNumberFromHeaderCartCounter();
-        softAssert.assertEquals(countAfterFirstAdding, 1, "Count After First Adding should be 1");
+        softAssert.assertEquals(countAfterFirstAdding, COUNT_AFTER_ADDING, "Count After First Adding should be 1");
 
-        mainPage.getNotificationPopUp().waitInvisibleCookiesNotification();
-        mainPage.getNotificationPopUp().waitInvisibleAddedToCartNotificationText();
+        mainPage.getNotificationPopUp().clickOnAcceptCookiesNotification();
 
         header.navigateToCartModal(mainPage);
 
         CartPage cartPage = mainPage.getCartModal().clickOnMakeOrderButton();
-        Thread.sleep(3000);
 
         cartPage.getContactDetailsComponent()
-                .enterName("Test User")
-                .enterPhone("+380501234567")
-                .enterComment("Доставити після 18:00");
+                .enterName(CUSTOMER_NAME)
+                .enterPhone(CUSTOMER_PHONE)
+                .enterComment(DELIVERY_COMMENT);
 
         cartPage.getDeliveryComponent().getDeliveryRadioGroup().clickDeliveryRadioButton(DeliveryRadioGroupEnum.UKLON_TAXI);
-        cartPage.getDeliveryComponent().enterAddressForUklon("м. Миколаїв, вул. Сінна 23");
+        cartPage.getDeliveryComponent().enterAddressForUklon(UKLON_ADDRESS);
 
         cartPage.getPaymentComponent().clickOnBankTransferRadioButton();
 
@@ -63,8 +72,8 @@ public class CartPageTest extends BaseTestRunner {
                 .clickOnConfirmOrderButton();
 
         String successMessage = orderSuccessPage.getOrderSuccessMessageText();
-        softAssert.assertEquals(successMessage, "Дякуємо за Ваш вибір!",
-                "Order confirmation message should contain 'Дякуємо за Ваш вибір!'");
+        softAssert.assertEquals(successMessage, EXPECTED_SUCCESS_MESSAGE,
+                "Order confirmation message should contain '" + EXPECTED_SUCCESS_MESSAGE + "'");
 
         MainPage redirectedMainPage = orderSuccessPage.clickOnToMainPageButton();
 
@@ -72,7 +81,5 @@ public class CartPageTest extends BaseTestRunner {
                 "User should be redirected to main page after clicking 'На головну'");
 
         softAssert.assertAll();
-
-
     }
 }
